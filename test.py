@@ -8,5 +8,5 @@ a = jun (length)
 a.mix()
 #entropy = a.gauge_entropy()
 #print entropy
-print a.min_entropy
+#print a.min_entropy
 print a.measure_entropy(1)

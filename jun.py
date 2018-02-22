@@ -127,6 +127,23 @@ class jun:
 		return totals
 				
 
+	def count_unique_info(self,list,interval):
+		size = len(list)
+		totals  = { 'flips' : 0, 'stays' : 0 }
+		for i in range(0, size - interval):
+			descents, ascents = [], []
+			for j in xrange(i + interval, size):
+				if list[i] < list[j]:
+					if len(ascents) == 0 or list[j] < list[ascents[-1]]:
+						ascents.append(j)
+				elif list[i] > list[j]:
+					if len(descents) == 0 or list[j] > list[descents[-1]]:
+						descents.append(j)
+			totals['stays'] += len(ascents)
+			totals['flips'] += len(descents)
+		return totals
+				
+
 	def count_info_by_proxy(self,list,previously_determined):
 		size = len(list)
 		totals  = { 'flips' : 0, 'stays' : 0 }
@@ -188,8 +205,8 @@ class jun:
 		return return_array
 
 	def measure_entropy(self,interval):
-		unique_info = self.count_info(self.list,interval)
-		self.calculate_entropy(unique_info['flips'],unique_info['stays'])
+		unique_info = self.count_unique_info(self.list,interval)
+		return unique_info['stays'] + unique_info['flips']
 
 	def gauge_energy(self,start,end):
 		pass
