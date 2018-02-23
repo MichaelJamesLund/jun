@@ -75,6 +75,36 @@ class jun:
 		return entropy_vector
 
 
+	def evaluate_runs(self,interval):
+		list = self.list
+		runs = {}
+
+
+
+	def count_info_simply(self):
+		list = self.list
+		size = len(list)
+		tallies = []
+		for i in xrange (0,size):
+			tallies.append({'numberThatAreGreater' : 0, 'leastGreater' : None })
+#		tallies = [{'numberThatAreGreater' : 0, 'leastGreater' : None }] * size
+		for i in range (0, size):
+			for j in range (i + 1, size):
+
+				if list[i] < list[j]:
+					lesser = tallies[i]; greaterVal = list[j]
+				elif list[i] > list[j]:
+					greaterVal = list[i]; lesser = tallies[j]
+
+				if lesser['leastGreater'] == None or lesser['leastGreater'] > greaterVal:
+					lesser['leastGreater'] = greaterVal
+					lesser['numberThatAreGreater'] += 1
+
+		for elem in tallies:
+			print elem['numberThatAreGreater']
+		return sum(elem['numberThatAreGreater'] for elem in tallies)
+
+
 	def count_info(self,list,interval):
 		size = len(list)
 		totals  = { 'flips' : 0, 'stays' : 0 }
