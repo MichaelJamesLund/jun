@@ -9,4 +9,4 @@ a.mix()
 #entropy = a.gauge_entropy()
 #print entropy
 #print a.min_entropy
-print a.count_info_simply()
+#print (a.count_info_simply())
